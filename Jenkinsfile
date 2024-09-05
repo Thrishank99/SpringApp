@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Build Maven'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Thrishank99/SpringAppDevelopment.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Thrishank99/SpringApp.git']]])
                 bat 'mvn clean install'
             }
         }
@@ -18,8 +18,9 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                  withCredentials([string(credentialsId: 'srinudockerpwd', variable: 'dockerhubpwd')]) {
-                  bat "docker login -u ${env.thrishank99} -p ${env.dockerhubpwd}"
+                  withCredentials([usernamePassword(credentialsId: 'srinudockerhub', passwordVariable: 'srinudockerhub', usernameVariable: 'srinudockerhub')]) {
+                  bat "docker login -u ${env.thrishank99} -p ${env.srinudockerhub}"
+
 }
                   bat 'docker push thrishank99/spring-app-development'
                 }
