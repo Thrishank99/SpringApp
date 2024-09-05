@@ -18,8 +18,8 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                  withCredentials([usernamePassword(credentialsId: 'boothub-spring', passwordVariable: 'boothub-spring', usernameVariable: 'boothub-spring')]) {
-                  bat "docker login -u ${env. thrishank99} -p ${env.boothub-spring}"
+                 withCredentials([string(credentialsId: 'srinuworld-pwd', variable: 'srinuworld')]) {
+                  bat 'docker login -u thrishank99 -p ${srinuworld}'
 
 }
                   bat 'docker push  thrishank99/spring-app-development'
