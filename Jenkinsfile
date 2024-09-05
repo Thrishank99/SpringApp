@@ -20,7 +20,6 @@ pipeline {
                 script{
                   withCredentials([string(credentialsId: 'srinudockerpwd', variable: 'dockerhubpwd')]) {
                   bat "docker login -u ${env.thrishank99} -p ${env.dockerhubpwd}"
-
 }
                   bat 'docker push thrishank99/spring-app-development'
                 }
